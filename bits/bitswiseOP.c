@@ -115,9 +115,8 @@ unsigned char n_rotate(unsigned char _x, int n){
 
 unsigned char SitBits(unsigned char _x, int _p, int _n, unsigned char _y){
     unsigned char n_bits = 1;
-    unsigned char temp = 255; // Unused variable (kept as-is)
 
-    // Build mask with _n ones: (1<<_n)-1
+    // Build mask with _n ones
     for(int i = 0; i < _n; i++){
         n_bits *= 2;
     }
