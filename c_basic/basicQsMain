@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include "basicQuestions.h"
+
+int main(){
+    int a, b, number = 23432, number2 = 1324;
+    printf ("please enter two numbers:\n");
+    scanf("%d%d", &a, &b);
+    int game = check_numbers(1234,1324);
+    printf("the result of the game is %d\n", game);
+
+    printf("The sum of the 2 numbers %d\n", a+b);
+    printf("The difference between the 2 numbers %d\n", a-b);
+    printf("The multiply of the 2 numbers %d\n", a*b);
+    printf("The factorial of %d is %ld\n", a, factorial(a));
+    is_palindrome(number)?printf("the number %d is palindrome\n", number):printf("the number %d is not palindrome\n", number);
+    is_ordered(number2)?printf("the number %d is in ascending order\n", number2):printf("the number %d is not in ascending order\n", number2);
+    is_prime(a)?printf("the number %d is prime\n", a):printf("the number %d is not prime\n", a);
+
+}
