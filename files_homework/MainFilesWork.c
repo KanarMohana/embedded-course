@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "fileswork.h"
 
 int main(){
     Person Persons[3];

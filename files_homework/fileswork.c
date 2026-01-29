@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "fileswork.h"
 #define MAX_WORDS 100
 
 
