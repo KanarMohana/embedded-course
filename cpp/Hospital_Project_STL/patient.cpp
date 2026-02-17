@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+#include <string.h>
+#include "patient.h"
+#include "visit.h"
+
+
+
+patient::patient(const string& person_name, const string& person_id,int year, const string& gender):person(person_name,person_id)
+{
+    this->year = year;
+    this->gender= gender;
+}
+
+
+int patient::get_year() const
+{
+    return this->year;
+}
+
+const string& patient::get_gender() const
+{
+    return this->gender;
+}
+
+const list<visit>& patient::get_visitP() const
+{
+    return this->visitsP_arr;
+}
+
+
+bool patient::set_year(int year)
+{
+    this->year = year;
+    return true;
+}
+bool patient::set_gender(const string& gender)
+{
+    this->gender= gender;
+    return true;
+}
+
+bool patient::add_visit_patient(visit *visitPtr)
+{
+    visitsP_arr.push_back(*visitPtr);
+    return true;
+}
+
+ostream &operator<<(ostream &os, const patient &p)
+{
+    os << "Patient Details: \n";
+    os << (person&)p;
+    os << "Birth Year: " << p.year << "\n";
+    os << "Gender: " << p.gender << "\n";
+    os << "Visits Deatils : \n";
+
+    list<visit>::const_iterator itr = p.visitsP_arr.begin();
+    list<visit>::const_iterator itrEnd = p.visitsP_arr.end();
+
+    if(itr==itrEnd)
+    {
+        return os;
+    }
+
+    for (; itr != itrEnd ; ++itr)
+    {
+        os<< itr->get_visit_date() << endl;
+    }
+
+    return os;
+}
