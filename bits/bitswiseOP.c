@@ -3,7 +3,13 @@
 #include <stdlib.h>
 #include "bitwiseOP.h"
 
-#define BIT 4   
+#define BITS_IN_BYTE 8   
+
+struct pack 
+{
+    unsigned char Right : 4;
+    unsigned char Left : 4;
+};
 
 int bit_count_char(unsigned char x){
     int count = 0;
@@ -23,7 +29,7 @@ int bit_count_int(unsigned int x){
 
     // Iterate over all bits in unsigned int
     // sizeof(unsigned int) * BIT is intended to represent number of bits
-    for(int i = 0; i < sizeof(unsigned int) * BIT; ++i){
+    for(int i = 0; i < sizeof(unsigned int) * BITS_IN_BYTE; ++i){
         if (x & (1 << i)){
             count++;
         }
@@ -144,18 +150,20 @@ unsigned char SitBits(unsigned char _x, int _p, int _n, unsigned char _y){
 //Maps letters 'a'..'o' to values 1..15. 
 int letter_to_new_lan(char c) {
     if (c < 'a' || c > 'o') return -1;
-    return c - 'a' + 1;
+    return c - 'a ' + 1;
 }
 
 
 unsigned char* compress_4bit(const char* s, size_t* out_len_bytes) {
-    if (!s || !out_len_bytes) return NULL;
-
+    if (!s || !out_len_bytes) {
+        return NULL;
+    }
     size_t len = strlen(s);
     size_t bytes = (len + 1) / 2;   // Number of output bytes
+    struct pack *ptr;
 
     // Allocate zero-initialized buffer
-    unsigned char* out = (unsigned char*)calloc(bytes, 1);
+    //unsigned char* out = (unsigned char*)malloc(bytes);
     if (!out) return NULL;
 
     for (size_t i = 0; i < len; i++) {
@@ -167,11 +175,11 @@ unsigned char* compress_4bit(const char* s, size_t* out_len_bytes) {
 
         // Even index -> store in high nibble
         if ((i & 1) == 0) {
-            out[i / 2] |= (unsigned char)(nib << 4);
+            s[i / 2] |= (unsigned char)(nib << 4); // change out to s no need to malloc
         }
         // Odd index -> store in low nibble
         else {
-            out[i / 2] |= (unsigned char)(nib & 0x0F);
+            s[i / 2] |= (unsigned char)(nib & 0x0F);
         }
     }
 

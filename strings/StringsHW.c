@@ -17,38 +17,39 @@ int Check_parameters(char* _str){
 }
 
 int ReverseStr (char* _str){
-    int i=0;
-    int j=strlen(_str)-1;
+    int left=0;
+    int right=strlen(_str)-1;
     int result = Check_parameters(_str);
     int temp = _str[0];
     if(result<0){
         return result;
     }
-    while(i<j){
-        temp=_str[i];
-        _str[i]=_str[j];
-        _str[j] = temp;
-        ++i;
-        --j;
+    while(left<right){
+        //change it to swap function
+        temp=_str[left]; 
+        _str[left]=_str[right];
+        _str[right] = temp;
+        ++left;
+        --right;
     }
     return 0;
 }
 
 int isPalindrome (char* _str){
     int result = Check_parameters(_str);
-    int i = 0;
-    int j = strlen(_str)-1;
+    int left = 0;
+    int right = strlen(_str)-1;
     if (result < 0){
         return result;
     }
-    while(i<j){
-        if(_str[i]!=_str[j]){
+    while(left<right){
+        if(_str[left]!=_str[right]){
             return 0;
         }
-        ++i;
-        --j;
+        ++left;
+        --right;
     }
-    return 1;
+    return OK;
 }
 
 int MyAToI(char* _str, int* _num){
@@ -63,10 +64,13 @@ int MyAToI(char* _str, int* _num){
     
     for (int i=0; i<strlen(_str); ++i){
         curr_digit = _str[i];
-
+        
+        //skip spaces - could do it as function
         if(_str[i]==' ' && digitsNum==0){
             continue;
         }
+
+        //check sign - could do it as function
         else if(_str[i]=='-' && digitsNum==0){
             sign = -1;
         }
@@ -77,8 +81,10 @@ int MyAToI(char* _str, int* _num){
             *_num = *_num * 10 + (curr_digit-'0');
             digitsNum++;
         }
-        else break;
-
+        //
+        else {
+            break;
+        }
     }
     *_num*=sign;
     return 1; 
@@ -86,13 +92,18 @@ int MyAToI(char* _str, int* _num){
 
 int MyIToA(int _num, char* _buffer){
     if (_buffer == NULL){ 
-        return -1;
+        return NULL_POINTER;
     }
     int curr_digit;
     int digitsNum = 0;
     int temp = _num;
     int sign = 0;
-    
+
+    if(_num ==0){
+        _buffer[0] = '0';
+        _buffer[1] = '\0';
+        return OK;
+    }
 
     if (_num < 0) {
         sign = 1;
@@ -114,7 +125,6 @@ int MyIToA(int _num, char* _buffer){
     }
     _buffer[digitsNum + sign] = (char)((_num % 10) + '0');
 
-    
-    return 1;
+    return OK;
 }
 

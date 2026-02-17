@@ -7,12 +7,8 @@
 #define UNDER_FLOW -3
 #define OK 1
 
-typedef struct DynamicArray{
-    int *dArray;
-    int dArraySize;
-    int dArrayBlockSize;
-    int NumOfElements;
-} DynamicArray;
+
+typedef struct DynamicArray DynamicArray;
 
 
 /*

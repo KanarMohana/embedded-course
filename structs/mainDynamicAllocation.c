@@ -1,6 +1,14 @@
 #include <stdio.h>
 #include "DynamicAllocation.h"
 
+
+typedef struct DynamicArray{
+    int *dArray;
+    int dArraySize;
+    int dArrayBlockSize;
+    int NumOfElements;
+} DynamicArray;
+
 int main(void)
 {
     DynamicArray *da;

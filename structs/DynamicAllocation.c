@@ -8,6 +8,14 @@
 #define OK 1
 
 
+struct DynamicArray{
+    int *dArray;
+    int dArraySize;
+    int dArrayBlockSize;
+    int NumOfElements;
+} ;
+
+
 DynamicArray* DynamicArrayCreate( int size, int blockSize) {
     DynamicArray *dynamicStruct;
 
